@@ -1,14 +1,19 @@
 {% extends "base.html" %}
-{% block content %}
-<div id="min-height" class="container mt-3 text-center" style="height: 60vh;">
-    <div class="mt-4 p-5 bg-white text-black">
-        <h1>ProjectX.... Management at it's finest!</h1>
-        <p>Keep track of your records effectively.</p>
-    </div><br>
-    <div class="d-grid gap-2 col-3 mx-auto">
-        <a href="#">
-            <button class="btn btn-dark" type="button"> Create your account <i class="fa-solid fa-address-book"></i></button>
-        </a>
-    </div>
-</div>
-{% endblock content %}
+    {% block content %}
+        <form>
+            <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    {% endblock content %}
