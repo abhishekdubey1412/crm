@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+    {% block content %}
+        {% for record in records %}
+            {{record.first_name}}
+            {{record.last_name}}
+            {{record.email}}
+            {{record.phone}}
+        {% endfor %}
+    {% endblock content %}

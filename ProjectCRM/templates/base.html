@@ -23,12 +23,12 @@
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard <i
+                        <a class="nav-link active" aria-current="page" href="{% url "dashboard" %}">Dashboard <i
                             class="fa-solid fa-house"></i></a>
                     </li>
                         
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Sign out <i
+                        <a class="nav-link active" aria-current="page" href="{% url "sign_out" %}">Sign out <i
                             class="fa-solid fa-right-from-bracket"></i></i></a>
                     </li>
                     {% else %}

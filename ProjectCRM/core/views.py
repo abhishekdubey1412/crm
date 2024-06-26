@@ -1,12 +1,13 @@
 from .models import Records
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import CreateUserForm, LoginForm
 
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'index.html')
+        return redirect('dashboard')
     return render(request, 'index.html')
 
 
@@ -33,12 +34,12 @@ def register(request):
 
 def sign_in(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('dashboard')
 
     form = LoginForm()
 
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = LoginForm(request, request.POST)
 
         if form.is_valid():
             username = request.POST.get('username')
@@ -47,10 +48,24 @@ def sign_in(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('dashboard')
 
     context = {
         'form': form
     }
     
     return render(request, 'sign-in.html', context)
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('sign_in')
+
+
+@login_required(login_url='sign_in')
+def dashboard(request):
+    user_records = Records.objects.all()
+    context = {
+        'records': user_records
+    }
+    return render(request, 'dashboard.html', context)
