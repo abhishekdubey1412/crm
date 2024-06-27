@@ -1,0 +1,12 @@
+.form-layout{
+    border-radius: 15px;
+    width: 500px;
+}
+
+.form-text{
+    color: rgb(164, 164, 164) !important;
+}
+ 
+input, optgroup, select, textarea{
+    width: -webkit-fill-available;
+}

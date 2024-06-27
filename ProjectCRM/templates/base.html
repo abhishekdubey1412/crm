@@ -14,35 +14,47 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">ProjectCRM</a>
+            <a class="navbar-brand" href="{% url 'home' %}">ProjectX</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url "dashboard" %}">Dashboard <i
+                        <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Dashboard <i
                             class="fa-solid fa-house"></i></a>
-                    </li>
+                        </li>
                         
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url "sign_out" %}">Sign out <i
-                            class="fa-solid fa-right-from-bracket"></i></i></a>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'logout_user' %}">Sign out <i
+                                class="fa-solid fa-right-from-bracket"></i></i></a>
+                        </li>
+                        {% else %}
+                        
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
                     </li>
-                    {% else %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "sign_in" %}">Login</a>
+                        <a class="nav-link" href="{% url 'login_user' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success d-flex align-items-center container" id="message_alert" role="alert">
+        <i class="fa-solid fa-circle-check fa-lg m-2"></i> 
+        <div class="message">
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
 
     {% block content %}
     {% endblock content %}

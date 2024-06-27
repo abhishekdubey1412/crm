@@ -2,7 +2,7 @@ from .models import Records
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm, AddRecordForm
 
 # Create your views here.
 def home(request):
@@ -22,7 +22,7 @@ def register(request):
 
         if form.is_valid():
             form.save()
-            return redirect('sign_in')
+            return redirect('user_login')
         
 
     context = {
@@ -32,7 +32,7 @@ def register(request):
     return render(request, 'register.html', context=context)
 
 
-def sign_in(request):
+def login_user(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
 
@@ -54,18 +54,36 @@ def sign_in(request):
         'form': form
     }
     
-    return render(request, 'sign-in.html', context)
+    return render(request, 'user_login.html', context)
 
 
-def sign_out(request):
+def logout_user(request):
     logout(request)
-    return redirect('sign_in')
+    return redirect('login_user')
 
 
-@login_required(login_url='sign_in')
+@login_required(login_url='login_user')
 def dashboard(request):
     user_records = Records.objects.all()
     context = {
         'records': user_records
     }
     return render(request, 'dashboard.html', context)
+
+
+@login_required(login_url='login_user')
+def create_record(request):
+    form = AddRecordForm()
+
+    if request.method == 'POST':
+        form = AddRecordForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+        
+    context = {
+        'form': form
+    }
+
+    return render(request, 'create_record.html', context)

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div id="min-height" class="container bg-dark text-white p-5 mt-5 form-layout">
+        <h3>Create Record</h3>
+        <h6>Start adding in the required details fro your record.</h6>
+        <hr>
+        <br>
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{form|crispy}}
+            <br>
+            <button type="submit" class="btn btn-primary w-100 btn-block p-2">Create account <i class="fa-solid fa-user-plus"></i></button>
+        </form>
+        <br>
+    </div>
+    <br>
+{% endblock content %}

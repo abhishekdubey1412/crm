@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div id="min-height" class="container bg-dark text-white p-5 mt-5 form-layout">
+        <h3>Update Record</h3>
+        <h6>Update your recode down below.</h6>
+        <hr>
+        <br>
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{form|crispy}}
+            <br>
+            <button type="submit" class="btn btn-primary w-100 btn-block p-2">Update record <i class="fa-solid fa-pen-to-square"></i></button>
+        </form>
+        <br>
+    </div>
+    <br>
+{% endblock content %}

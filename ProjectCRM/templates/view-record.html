@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="min-height" class="card container mt-5">
+    <div class="card-body">
+        <strong><i class="fa-solid fa-user"></i>  {{record.first_name}} {{record.last_name}} </strong>
+        <hr>
+        <br>
+        <p><strong>ID:</strong> {{record.id}}</p>
+        <p><strong>Email:</strong> {{record.email}}</p>
+        <p><strong>Number:</strong> {{record.phone}}</p>
+        <p><strong>Address:</strong> {{record.address}}</p>
+        <p><strong>City:</strong> {{record.city}}</p>
+        <p><strong>State:</strong> {{record.state}}</p>
+        <p><strong>Country:</strong> {{record.country}}</p>
+        <p><strong>Created:</strong> {{record.created_at}}</p>
+    </div>
+    <div class="container mb-2">
+        <a href="{% url 'dashboard' %}" type="button" class="btn btn-secondary"><i class="fa-solid fa-backward fa-xs"></i> Return</a>
+        <a href="{% url 'update_record' record.id %}" type="button" class="btn btn-success">Update record <i class="fa-solid fa-pen-to-square fa-xs"></i></a>
+        <a href="{% url 'delete_record' record.id %}" type="button" class="btn btn-danger">Delete record <i class="fa-solid fa-trash fa-xs"></i></a>
+    </div>
+</div>
+{% endblock content %}
